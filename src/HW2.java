@@ -39,10 +39,14 @@ public class HW2 {
             }
             List<String> token2 = tokenizer(sb.toString());
 
-            List<String> shingle1 = shingle(token1);
-            List<String> shingle2 = shingle(token2);
+            List<String> shingle1 = tokenToShingle(token1, 5);
+            List<String> shingle2 = tokenToShingle(token2, 5);
 
+            System.out.println(token1);
             for(String s: shingle1){
+                System.out.println(s);
+            }
+            for(String s: shingle2){
                 System.out.println(s);
             }
 
@@ -56,7 +60,7 @@ public class HW2 {
         }
     }
 
-    public static List<String> tokenizer(String s) throws Exception{
+    public static List<String> tokenizer(String s){
         StringTokenizer st = new StringTokenizer(s, " \t\n=;,<>()");
         List<String> token = new ArrayList<>();
         while (st.hasMoreTokens()) {
@@ -65,16 +69,18 @@ public class HW2 {
         return token;
     }
 
-    public static List<String> shingle(List<String> token) throws Exception{
+    public static List<String> tokenToShingle(List<String> token, int shingleSize){
         List<String> shingle = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
-        for(int i=0; i<token.size()-5; i++){
-            sb.delete(0,sb.length());
-            for(int j = i; j < i+5; j++){
-                sb.append(token.get(j)).append(" ");
-            }
-            sb.deleteCharAt(sb.length()-1);
-            shingle.add(sb.toString());
+        for(int i=0; i<shingleSize; i++){
+            sb.append(" ").append(token.get(i));
+        }
+        sb.deleteCharAt(0);
+        shingle.add(sb.toString());
+
+        for(int i = shingleSize; i < token.size(); i++){
+        sb.delete(0,sb.indexOf(" ")+1).append(" ").append(token.get(i));
+        shingle.add(sb.toString());
         }
         return shingle;
     }
