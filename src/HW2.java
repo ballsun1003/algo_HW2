@@ -1,7 +1,35 @@
 import java.io.*;
 import java.util.*;
 
+class Node<K,V>{
+    int N, aux;
+    K key;
+    V value;
+    Node<K,V> left, right, parent;
 
+    public Node(K key, V val){
+        this.key = key; this.value = val;
+        this.N = 1;
+    }
+
+    public int getAux() {
+        return aux;
+    }
+
+    public void setAux(int value) {
+        aux = value;
+    }
+}
+
+class BST<K extends  Comparable<K>, V>{
+    protected Node<K,V> root;
+
+    public int size() {
+        return (root != null) ? root.N : 0;
+    }
+
+
+}
 
 
 
