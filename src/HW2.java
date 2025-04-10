@@ -26,35 +26,56 @@ public class HW2 {
 
             StringBuilder sb = new StringBuilder();
             String line;
+
             while ((line = br1.readLine()) != null) {
                 sb.append(line).append("\n");
             }
-            String[] token1 = tokenizer(sb.toString());
+            List<String> token1 = tokenizer(sb.toString());
 
             sb.delete(0,sb.length());
-            while ((line = br1.readLine()) != null) {
+
+            while ((line = br2.readLine()) != null) {
                 sb.append(line).append("\n");
             }
-            String[] token2 = tokenizer(sb.toString());
+            List<String> token2 = tokenizer(sb.toString());
+
+            List<String> shingle1 = shingle(token1);
+            List<String> shingle2 = shingle(token2);
+
+            for(String s: shingle1){
+                System.out.println(s);
+            }
 
 
 
 
 
-
-
-
-        } catch (IOException e) {
-            System.err.println("파일 읽기 중 에러 발생: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    public static String[] tokenizer(String s) {
+    public static List<String> tokenizer(String s) throws Exception{
         StringTokenizer st = new StringTokenizer(s, " \t\n=;,<>()");
         List<String> token = new ArrayList<>();
         while (st.hasMoreTokens()) {
             token.add(st.nextToken());
         }
-        return token.toArray(new String[0]);
+        return token;
+    }
+
+    public static List<String> shingle(List<String> token) throws Exception{
+        List<String> shingle = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i<token.size()-5; i++){
+            sb.delete(0,sb.length());
+            for(int j = i; j < i+5; j++){
+                sb.append(token.get(j)).append(" ");
+            }
+            sb.deleteCharAt(sb.length()-1);
+            shingle.add(sb.toString());
+        }
+        return shingle;
     }
 }
