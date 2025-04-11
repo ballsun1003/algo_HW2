@@ -335,10 +335,10 @@ public class HW2 {
             Scanner scanner = new Scanner(System.in);
             while (true) {
                 try {
-                    System.out.print("첫 번째 파일 이름? ");
+                    System.out.print("첫번째 파일 이름? ");
                     file1 = scanner.nextLine();
                     br1 = new BufferedReader(new InputStreamReader(new FileInputStream(file1), "EUC-KR"));
-                    System.out.print("두 번째 파일 이름? ");
+                    System.out.print("두번째 파일 이름? ");
                     file2 = scanner.nextLine();
                     br2 = new BufferedReader(new InputStreamReader(new FileInputStream(file2), "EUC-KR"));
                     break;
